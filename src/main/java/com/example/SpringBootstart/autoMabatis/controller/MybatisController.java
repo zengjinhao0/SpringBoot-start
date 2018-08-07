@@ -24,8 +24,7 @@ public class MybatisController {
     }
 
     public List<TbUser> aaaa() {
-        System.out.println(service.get().toString());
-        return service.get();
+
     }
 
 }
