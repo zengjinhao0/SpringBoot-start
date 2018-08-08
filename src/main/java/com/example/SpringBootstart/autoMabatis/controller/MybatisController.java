@@ -23,8 +23,5 @@ public class MybatisController {
         return service.get();
     }
 
-    public List<TbUser> aaaa() {
-
-    }
 
 }
