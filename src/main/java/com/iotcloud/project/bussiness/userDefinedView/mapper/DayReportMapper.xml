@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotcloud.project.bussiness.userDefinedView.mapper.DayReportMapper" >
+  <resultMap id="BaseResultMap" type="com.iotcloud.project.bussiness.userDefinedView.domain.DayReport" >
+    <result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+    <result column="site_id" property="siteId" jdbcType="INTEGER" />
+    <result column="device_code" property="deviceCode" jdbcType="VARCHAR" />
+    <result column="first" property="first" jdbcType="DECIMAL" />
+    <result column="last" property="last" jdbcType="DECIMAL" />
+    <result column="max" property="max" jdbcType="DECIMAL" />
+    <result column="min" property="min" jdbcType="DECIMAL" />
+    <result column="energy_used" property="energyUsed" jdbcType="DECIMAL" />
+    <result column="dp_code" property="dpCode" jdbcType="VARCHAR" />
+    <result column="dp_name" property="dpName" jdbcType="VARCHAR" />
+    <result column="dp_type" property="dpType" jdbcType="VARCHAR" />
+    <result column="tp_max" property="tpMax" jdbcType="DECIMAL" />
+    <result column="tp_min" property="tpMin" jdbcType="DECIMAL" />
+    <result column="tp_avg" property="tpAvg" jdbcType="DECIMAL" />
+    <result column="tp_dp_code" property="tpDpCode" jdbcType="VARCHAR" />
+    <result column="tp_dp_name" property="tpDpName" jdbcType="VARCHAR" />
+    <result column="tp_dp_type" property="tpDpType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    data_time, site_id, device_code, first, last, max, min, energy_used, dp_code, dp_name, 
+    dp_type, tp_max, tp_min, tp_avg, tp_dp_code, tp_dp_name, tp_dp_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.DayReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from day_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0" >
+      limit ${limitStart} , ${count}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.DayReportExample" >
+    delete from day_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.DayReport" >
+    insert into day_report (data_time, site_id, device_code, 
+      first, last, max, min, 
+      energy_used, dp_code, dp_name, 
+      dp_type, tp_max, tp_min, 
+      tp_avg, tp_dp_code, tp_dp_name, 
+      tp_dp_type)
+    values (#{dataTime,jdbcType=TIMESTAMP}, #{siteId,jdbcType=INTEGER}, #{deviceCode,jdbcType=VARCHAR}, 
+      #{first,jdbcType=DECIMAL}, #{last,jdbcType=DECIMAL}, #{max,jdbcType=DECIMAL}, #{min,jdbcType=DECIMAL}, 
+      #{energyUsed,jdbcType=DECIMAL}, #{dpCode,jdbcType=VARCHAR}, #{dpName,jdbcType=VARCHAR}, 
+      #{dpType,jdbcType=VARCHAR}, #{tpMax,jdbcType=DECIMAL}, #{tpMin,jdbcType=DECIMAL}, 
+      #{tpAvg,jdbcType=DECIMAL}, #{tpDpCode,jdbcType=VARCHAR}, #{tpDpName,jdbcType=VARCHAR}, 
+      #{tpDpType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.DayReport" >
+    insert into day_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dataTime != null" >
+        data_time,
+      </if>
+      <if test="siteId != null" >
+        site_id,
+      </if>
+      <if test="deviceCode != null" >
+        device_code,
+      </if>
+      <if test="first != null" >
+        first,
+      </if>
+      <if test="last != null" >
+        last,
+      </if>
+      <if test="max != null" >
+        max,
+      </if>
+      <if test="min != null" >
+        min,
+      </if>
+      <if test="energyUsed != null" >
+        energy_used,
+      </if>
+      <if test="dpCode != null" >
+        dp_code,
+      </if>
+      <if test="dpName != null" >
+        dp_name,
+      </if>
+      <if test="dpType != null" >
+        dp_type,
+      </if>
+      <if test="tpMax != null" >
+        tp_max,
+      </if>
+      <if test="tpMin != null" >
+        tp_min,
+      </if>
+      <if test="tpAvg != null" >
+        tp_avg,
+      </if>
+      <if test="tpDpCode != null" >
+        tp_dp_code,
+      </if>
+      <if test="tpDpName != null" >
+        tp_dp_name,
+      </if>
+      <if test="tpDpType != null" >
+        tp_dp_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dataTime != null" >
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCode != null" >
+        #{deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="first != null" >
+        #{first,jdbcType=DECIMAL},
+      </if>
+      <if test="last != null" >
+        #{last,jdbcType=DECIMAL},
+      </if>
+      <if test="max != null" >
+        #{max,jdbcType=DECIMAL},
+      </if>
+      <if test="min != null" >
+        #{min,jdbcType=DECIMAL},
+      </if>
+      <if test="energyUsed != null" >
+        #{energyUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="dpCode != null" >
+        #{dpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dpName != null" >
+        #{dpName,jdbcType=VARCHAR},
+      </if>
+      <if test="dpType != null" >
+        #{dpType,jdbcType=VARCHAR},
+      </if>
+      <if test="tpMax != null" >
+        #{tpMax,jdbcType=DECIMAL},
+      </if>
+      <if test="tpMin != null" >
+        #{tpMin,jdbcType=DECIMAL},
+      </if>
+      <if test="tpAvg != null" >
+        #{tpAvg,jdbcType=DECIMAL},
+      </if>
+      <if test="tpDpCode != null" >
+        #{tpDpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tpDpName != null" >
+        #{tpDpName,jdbcType=VARCHAR},
+      </if>
+      <if test="tpDpType != null" >
+        #{tpDpType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.DayReportExample" resultType="java.lang.Integer" >
+    select count(*) from day_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update day_report
+    <set >
+      <if test="record.dataTime != null" >
+        data_time = #{record.dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.siteId != null" >
+        site_id = #{record.siteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceCode != null" >
+        device_code = #{record.deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.first != null" >
+        first = #{record.first,jdbcType=DECIMAL},
+      </if>
+      <if test="record.last != null" >
+        last = #{record.last,jdbcType=DECIMAL},
+      </if>
+      <if test="record.max != null" >
+        max = #{record.max,jdbcType=DECIMAL},
+      </if>
+      <if test="record.min != null" >
+        min = #{record.min,jdbcType=DECIMAL},
+      </if>
+      <if test="record.energyUsed != null" >
+        energy_used = #{record.energyUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dpCode != null" >
+        dp_code = #{record.dpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dpName != null" >
+        dp_name = #{record.dpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dpType != null" >
+        dp_type = #{record.dpType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tpMax != null" >
+        tp_max = #{record.tpMax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tpMin != null" >
+        tp_min = #{record.tpMin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tpAvg != null" >
+        tp_avg = #{record.tpAvg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tpDpCode != null" >
+        tp_dp_code = #{record.tpDpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tpDpName != null" >
+        tp_dp_name = #{record.tpDpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tpDpType != null" >
+        tp_dp_type = #{record.tpDpType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update day_report
+    set data_time = #{record.dataTime,jdbcType=TIMESTAMP},
+      site_id = #{record.siteId,jdbcType=INTEGER},
+      device_code = #{record.deviceCode,jdbcType=VARCHAR},
+      first = #{record.first,jdbcType=DECIMAL},
+      last = #{record.last,jdbcType=DECIMAL},
+      max = #{record.max,jdbcType=DECIMAL},
+      min = #{record.min,jdbcType=DECIMAL},
+      energy_used = #{record.energyUsed,jdbcType=DECIMAL},
+      dp_code = #{record.dpCode,jdbcType=VARCHAR},
+      dp_name = #{record.dpName,jdbcType=VARCHAR},
+      dp_type = #{record.dpType,jdbcType=VARCHAR},
+      tp_max = #{record.tpMax,jdbcType=DECIMAL},
+      tp_min = #{record.tpMin,jdbcType=DECIMAL},
+      tp_avg = #{record.tpAvg,jdbcType=DECIMAL},
+      tp_dp_code = #{record.tpDpCode,jdbcType=VARCHAR},
+      tp_dp_name = #{record.tpDpName,jdbcType=VARCHAR},
+      tp_dp_type = #{record.tpDpType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

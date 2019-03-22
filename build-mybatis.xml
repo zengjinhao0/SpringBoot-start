@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!--数据库驱动 -->
-    <classPathEntry location="D:\tool\maven\resp\omv\mysql\mysql-connector-java\5.0.5\mysql-connector-java-5.0.5.jar" />
+    <classPathEntry location="E:\tools\maven\resp\omv\mysql\mysql-connector-java\5.0.5\mysql-connector-java-5.0.5.jar" />
     <context
         id="MySQL2Tables"
         targetRuntime="MyBatis3"
@@ -33,7 +33,7 @@
         </javaTypeResolver>
         <!--生成Model类存放位置 -->
         <javaModelGenerator
-            targetPackage="com.iotcloud.project.bussiness.bussinessDatapoint.domain"
+            targetPackage="com.iotcloud.project.bussiness.userDefinedView.domain"
             targetProject="src/main/java">
             <property
                 name="enableSubPackages"
@@ -44,7 +44,7 @@
         </javaModelGenerator>
         <!--生成映射文件存放位置 -->
         <sqlMapGenerator
-            targetPackage="com.iotcloud.project.bussiness.bussinessDatapoint.mapper"
+            targetPackage="com.iotcloud.project.bussiness.userDefinedView.mapper"
             targetProject="src/main/java">
             <property
                 name="enableSubPackages"
@@ -53,7 +53,7 @@
         <!--生成Dao类存放位置 -->
         <javaClientGenerator
             type="XMLMAPPER"
-            targetPackage="com.iotcloud.project.bussiness.bussinessDatapoint.mapper"
+            targetPackage="com.iotcloud.project.bussiness.userDefinedView.mapper"
             targetProject="src/main/java">
             <property
                 name="enableSubPackages"

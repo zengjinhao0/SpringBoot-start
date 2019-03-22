@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotcloud.project.bussiness.userDefinedView.mapper.IotWorkDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDevice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="thing_id" property="thingId" jdbcType="INTEGER" />
+    <result column="collector_id" property="collectorId" jdbcType="INTEGER" />
+    <result column="port_id" property="portId" jdbcType="INTEGER" />
+    <result column="relation_code" property="relationCode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_by_id" property="createById" jdbcType="INTEGER" />
+    <result column="update_by_id" property="updateById" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="data_status" property="dataStatus" jdbcType="INTEGER" />
+    <result column="custom1" property="custom1" jdbcType="VARCHAR" />
+    <result column="custom2" property="custom2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, name, thing_id, collector_id, port_id, relation_code, remark, create_by_id, 
+    update_by_id, create_by, update_by, create_time, update_time, data_status, custom1, 
+    custom2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from iot_work_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0" >
+      limit ${limitStart} , ${count}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from iot_work_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from iot_work_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDeviceExample" >
+    delete from iot_work_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDevice" >
+    insert into iot_work_device (id, code, name, 
+      thing_id, collector_id, port_id, 
+      relation_code, remark, create_by_id, 
+      update_by_id, create_by, update_by, 
+      create_time, update_time, data_status, 
+      custom1, custom2)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{thingId,jdbcType=INTEGER}, #{collectorId,jdbcType=INTEGER}, #{portId,jdbcType=INTEGER}, 
+      #{relationCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createById,jdbcType=INTEGER}, 
+      #{updateById,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{dataStatus,jdbcType=INTEGER}, 
+      #{custom1,jdbcType=VARCHAR}, #{custom2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDevice" >
+    insert into iot_work_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="thingId != null" >
+        thing_id,
+      </if>
+      <if test="collectorId != null" >
+        collector_id,
+      </if>
+      <if test="portId != null" >
+        port_id,
+      </if>
+      <if test="relationCode != null" >
+        relation_code,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createById != null" >
+        create_by_id,
+      </if>
+      <if test="updateById != null" >
+        update_by_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="dataStatus != null" >
+        data_status,
+      </if>
+      <if test="custom1 != null" >
+        custom1,
+      </if>
+      <if test="custom2 != null" >
+        custom2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="thingId != null" >
+        #{thingId,jdbcType=INTEGER},
+      </if>
+      <if test="collectorId != null" >
+        #{collectorId,jdbcType=INTEGER},
+      </if>
+      <if test="portId != null" >
+        #{portId,jdbcType=INTEGER},
+      </if>
+      <if test="relationCode != null" >
+        #{relationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=INTEGER},
+      </if>
+      <if test="updateById != null" >
+        #{updateById,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        #{dataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="custom1 != null" >
+        #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        #{custom2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDeviceExample" resultType="java.lang.Integer" >
+    select count(*) from iot_work_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update iot_work_device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thingId != null" >
+        thing_id = #{record.thingId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectorId != null" >
+        collector_id = #{record.collectorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.portId != null" >
+        port_id = #{record.portId,jdbcType=INTEGER},
+      </if>
+      <if test="record.relationCode != null" >
+        relation_code = #{record.relationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createById != null" >
+        create_by_id = #{record.createById,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateById != null" >
+        update_by_id = #{record.updateById,jdbcType=INTEGER},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataStatus != null" >
+        data_status = #{record.dataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.custom1 != null" >
+        custom1 = #{record.custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custom2 != null" >
+        custom2 = #{record.custom2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update iot_work_device
+    set id = #{record.id,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      thing_id = #{record.thingId,jdbcType=INTEGER},
+      collector_id = #{record.collectorId,jdbcType=INTEGER},
+      port_id = #{record.portId,jdbcType=INTEGER},
+      relation_code = #{record.relationCode,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_by_id = #{record.createById,jdbcType=INTEGER},
+      update_by_id = #{record.updateById,jdbcType=INTEGER},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      data_status = #{record.dataStatus,jdbcType=INTEGER},
+      custom1 = #{record.custom1,jdbcType=VARCHAR},
+      custom2 = #{record.custom2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDevice" >
+    update iot_work_device
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="thingId != null" >
+        thing_id = #{thingId,jdbcType=INTEGER},
+      </if>
+      <if test="collectorId != null" >
+        collector_id = #{collectorId,jdbcType=INTEGER},
+      </if>
+      <if test="portId != null" >
+        port_id = #{portId,jdbcType=INTEGER},
+      </if>
+      <if test="relationCode != null" >
+        relation_code = #{relationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        create_by_id = #{createById,jdbcType=INTEGER},
+      </if>
+      <if test="updateById != null" >
+        update_by_id = #{updateById,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        data_status = #{dataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="custom1 != null" >
+        custom1 = #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        custom2 = #{custom2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iotcloud.project.bussiness.userDefinedView.domain.IotWorkDevice" >
+    update iot_work_device
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      thing_id = #{thingId,jdbcType=INTEGER},
+      collector_id = #{collectorId,jdbcType=INTEGER},
+      port_id = #{portId,jdbcType=INTEGER},
+      relation_code = #{relationCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by_id = #{createById,jdbcType=INTEGER},
+      update_by_id = #{updateById,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      data_status = #{dataStatus,jdbcType=INTEGER},
+      custom1 = #{custom1,jdbcType=VARCHAR},
+      custom2 = #{custom2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

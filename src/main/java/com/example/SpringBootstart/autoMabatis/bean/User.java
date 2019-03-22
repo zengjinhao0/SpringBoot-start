@@ -9,7 +9,7 @@ public class User {
 
     private String tel;
 
-    private String user_name;
+    private String username;
 
     private String password;
 
@@ -41,12 +41,12 @@ public class User {
         this.tel = tel == null ? null : tel.trim();
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name == null ? null : user_name.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
